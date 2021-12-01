@@ -53,6 +53,7 @@ form {
   height: 381px;
   align-items: stretch;
   position: relative;
+  transform-style: preserve-3d;
 }
 
 legend {
@@ -159,5 +160,21 @@ a.close {
 }
 
 form.submitting {
-  background-color: red;
+  animation-duration: 1s;
+  animation-name: flipout;
+  animation-timing-function: cubic-bezier(0, 0, 0, 1.53);
+}
+
+@keyframes flipout {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+
+  25% {
+    transform: rotateX(360deg) scale(0.5);
+  }
+
+  100% {
+    transform: scale(0.5) translateY(-150vh);
+  }
 }

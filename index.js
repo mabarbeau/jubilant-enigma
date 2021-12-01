@@ -1,15 +1,14 @@
 import { Observable } from 'https://unpkg.com/rxjs?module';
 import isEmail from 'https://unpkg.com/validator/es/lib/isEmail?module';
 
-const $elements = {
-    form: document.querySelector('form'),
-    inputs: document.querySelectorAll('input[name]'),
-    submit: document.querySelector('input[type="submit"]'),
-}
+
+const $form = document.querySelector('form')
+const $inputs = document.querySelectorAll('input[name]')
+const $submit = document.querySelector('input[type="submit"]')
 
 const validators = {
     email: (value) => isEmail(value),
-    password: (value) => value.length > 2,
+    password: (value) => value.length,
 }
 
 const data = {
@@ -19,36 +18,41 @@ const data = {
 }
 
 const observable = new Observable((subscriber) => {
-    $elements.inputs.forEach((element) => {
+    $inputs.forEach((element) => {
         data[element.name] = element.value
-        element.addEventListener('change', (event) => {
-            subscriber.next(event.target);
-        });
+        element.addEventListener('keyup', (event) => subscriber.next(event))
     })
 });
 
 observable.subscribe({
-    next: (target) => {
+    next: ({ target }) => {
         data[target.name] = target.value
     
-        target.parentNode.setAttribute('class', validators[target.name](data[target.name]) ? 'valid' : '')
+        target.parentNode.classList[validators[target.name](data[target.name]) ? 'add' : 'remove']('valid')
+    },
+});
 
+observable.subscribe({
+    next: () => {
         const isValid = data.isValid();
 
-        $elements.form.setAttribute('class', isValid ? 'valid' : '')
+        $form.classList[isValid ? 'add' : 'remove']('valid')
 
-        $elements.submit.disabled = !isValid
+        $submit.disabled = !isValid
     },
-    error: console.error,
 });
 
 
-$elements.form.addEventListener('submit', function (event) {
+$form.addEventListener('submit', function (event) {
     event.preventDefault()
 
     const isValid = data.isValid();
     
     if (isValid) {
-        $elements.form.setAttribute('class', isValid ? 'submitting' : '')
+        $form.classList[isValid ? 'add' : 'remove']('submitting')
     }
+})
+
+$form.addEventListener('animationend', () => {
+    $form.classList.remove('submitting')
 });
