@@ -1,0 +1,163 @@
+:root {
+  --primary: #4dcc70;
+  --primary-dark: #49c276;
+  --light: #bdc3c7;
+  --lighter: #f4f4f4;
+  --text-primary: black;
+  --text-light: rgb(191 197 200);
+  --white: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--primary);
+  height: 100%;
+  display: grid;
+  color: var(--text-primary);
+}
+
+img.assignment {
+  opacity: 0;
+  z-index: 100;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+form {
+  width: 25em;
+  background-color: var(--white);
+  justify-self: center;
+  align-self: center;
+  padding: 2.5em;
+  margin-bottom: 2.5em;
+  height: 381px;
+  align-items: stretch;
+  position: relative;
+}
+
+legend {
+  font-size: 1.25em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0;
+  margin-top: 0.3em;
+  margin-left: 0.375em;
+  margin-bottom: 1.9em;
+  font-weight: 600;
+  color: var(--light);
+}
+
+form.valid legend {
+  color: var(--primary-dark);
+}
+
+label {
+  color: var(--text-light);
+  margin-top: 1em;
+  position: relative;
+  padding-top: 1em;
+  display: flex;
+  font-weight: 400;
+}
+
+label span {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+}
+
+label.valid span {
+  color: var(--primary-dark);
+}
+
+input {
+  width: 100%;
+  font-size: 1.2em;
+  margin: 0;
+  font-family: inherit;
+}
+
+input[type="text"] {
+  letter-spacing: 0.02em;
+}
+
+input[type="password"] {
+  letter-spacing: 0.15em;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 0.5em 0.1em 0.6em;
+  border: 0;
+  border-bottom: 0.25em solid var(--light);
+  font-weight: 300;
+}
+
+label.valid input[type="text"],
+label.valid input[type="password"] {
+  border-bottom-color: var(--primary-dark);
+}
+
+input[type="submit"] {
+  padding: 0;
+  text-align: center;
+  background-color: var(--primary);
+  border: 0;
+  margin-top: 2em;
+  color: var(--white);
+  height: 3.1em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 300;
+  padding-left: 0.2em;
+}
+
+input[type="submit"]:disabled {
+  background-color: var(--light);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+a.close {
+  position: absolute;
+  top: 1.2em;
+  right: 0.5em;
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  color: var(--lighter);
+}
+
+form.submitting {
+  background-color: red;
+}

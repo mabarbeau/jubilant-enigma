@@ -1,0 +1,18 @@
+{
+  "name": "jubilant-enigma",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mabarbeau/jubilant-enigma.git",
+  "author": "Marc Barbeau <3001781-mabarbeau1@users.noreply.gitlab.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "serve": "npx serve"
+  },
+  "dependencies": {
+    "rxjs": "^7.4.0",
+    "stylelint": "^14.1.0",
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-config-standard-scss": "^3.0.0"
+  }
+}
