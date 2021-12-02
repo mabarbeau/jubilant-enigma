@@ -6,6 +6,11 @@ const $form = document.querySelector('form')
 const $inputs = document.querySelectorAll('input[name]')
 const $submit = document.querySelector('input[type="submit"]')
 
+$inputs.forEach((element) => {
+    element.addEventListener('focus', (event) => event.target.parentNode.classList.add('focused'))
+    element.addEventListener('blur', (event) => event.target.parentNode.classList.remove('focused'))
+})
+
 const validators = {
     email: (value) => isEmail(value),
     password: (value) => value.length,
@@ -28,6 +33,8 @@ observable.subscribe({
     next: ({ target }) => {
         data[target.name] = target.value
     
+        target.parentNode.classList[target.value.length ? 'remove' : 'add']('empty')
+
         target.parentNode.classList[validators[target.name](data[target.name]) ? 'add' : 'remove']('valid')
     },
 });

@@ -27,7 +27,7 @@ body {
 }
 
 img.assignment {
-  opacity: 0;
+  opacity: 0.5;
   z-index: 100;
   margin: auto;
   position: absolute;
@@ -53,7 +53,6 @@ form {
   height: 381px;
   align-items: stretch;
   position: relative;
-  transform-style: preserve-3d;
 }
 
 legend {
@@ -67,10 +66,14 @@ legend {
   margin-bottom: 1.9em;
   font-weight: 600;
   color: var(--light);
+  transition: color 0.5s;
 }
 
 form.valid legend {
   color: var(--primary-dark);
+  animation-duration: 0.25s;
+  animation-name: grow;
+  animation-timing-function: ease-in-out;
 }
 
 label {
@@ -80,15 +83,24 @@ label {
   padding-top: 1em;
   display: flex;
   font-weight: 400;
+  transition: color 0.5s;
 }
 
 label span {
   position: absolute;
   z-index: 1;
   top: 0;
+  transition: all 0.25s;
 }
 
-label.valid span {
+label.empty:not(.focused) span {
+  top: 1.1em;
+  font-size: 1.2em;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+label.valid {
   color: var(--primary-dark);
 }
 
@@ -123,7 +135,6 @@ label.valid input[type="password"] {
 input[type="submit"] {
   padding: 0;
   text-align: center;
-  background-color: var(--primary);
   border: 0;
   margin-top: 2em;
   color: var(--white);
@@ -132,10 +143,11 @@ input[type="submit"] {
   letter-spacing: 0.2em;
   font-weight: 300;
   padding-left: 0.2em;
+  background-color: var(--light);
 }
 
-input[type="submit"]:disabled {
-  background-color: var(--light);
+input[type="submit"]:focus {
+  background-color: var(--primary);
 }
 
 .sr-only {
@@ -162,7 +174,7 @@ a.close {
 form.submitting {
   animation-duration: 1s;
   animation-name: flipout;
-  animation-timing-function: cubic-bezier(0, 0, 0, 1.53);
+  animation-timing-function: cubic-bezier(0.17, 0.86, 0.11, 1.05);
 }
 
 @keyframes flipout {
@@ -170,11 +182,29 @@ form.submitting {
     transform: rotateY(0deg) scale(1);
   }
 
-  25% {
-    transform: rotateX(360deg) scale(0.5);
+  40% {
+    transform: rotateX(-360deg) scale(0.45);
+  }
+
+  50% {
+    transform: scale(0.5);
   }
 
   100% {
-    transform: scale(0.5) translateY(-150vh);
+    transform: scale(0.5) translateY(-125vh);
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
