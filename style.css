@@ -191,7 +191,7 @@ form.submitting {
   }
 
   100% {
-    transform: scale(0.5) translateY(-125vh);
+    transform: scale(0.5) translateY(calc(-100vh - 100%));
   }
 }
 
